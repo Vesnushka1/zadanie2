@@ -1,10 +1,14 @@
 <template>
-  <input type="text" name="" id="">
+  <input @input="sendSearchValue" type="text" name="" id="">
 </template>
 
 <script>
 export default {
-  name: "SearchPerson"
+  methods:{
+    sendSearchValue(evt){
+      this.$emit('searchValue', evt.target.value)
+    }
+  }
 }
 </script>
 

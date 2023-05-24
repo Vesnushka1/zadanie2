@@ -1,16 +1,22 @@
 <template>
-<select>
+<select @change="sendSelectedOption">
   <option disabled selected>Выберите значение</option>
-  <option v-for="option in sorted"> {{option.name}}</option>
+  <option v-for="option in sorted" :value="option.value" :key="option.name"> {{option.name}}</option>
+  <option>По умолчанию</option>
 </select>
 </template>
 
 <script>
 export default {
-  name: "SortedPersons",
   props:{
     sorted:{
-      type:Array
+      type:Array,
+      default: ()=>[]
+    }
+  },
+  methods:{
+    sendSelectedOption(evt){
+      this.$emit('selOpt', evt.target.value)
     }
   }
 }

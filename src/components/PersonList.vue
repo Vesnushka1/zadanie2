@@ -1,5 +1,5 @@
 <template>
-  <one-person v-for="person in persons" :key="person.id" :person="person"></one-person>
+  <one-person @openDialogValue="this.$emit('openDialogValue', true, person)" v-for="person in persons" :key="person.id" :person="person"></one-person>
 </template>
 
 <script>
