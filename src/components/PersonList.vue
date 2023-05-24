@@ -1,12 +1,16 @@
 <template>
-  <one-person></one-person>
+  <one-person v-for="person in persons" :key="person.id" :person="person"></one-person>
 </template>
 
 <script>
+import OnePerson from "@/components/OnePerson";
 export default {
-  components: {}
-
-
+  components: {OnePerson},
+  props: {
+    persons: {
+      type: Array
+    }
+  }
 }
 </script>
 
