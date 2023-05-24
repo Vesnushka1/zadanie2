@@ -1,9 +1,11 @@
 <template>
-
+  <one-person></one-person>
 </template>
 
 <script>
 export default {
+  components: {}
+
 
 }
 </script>
