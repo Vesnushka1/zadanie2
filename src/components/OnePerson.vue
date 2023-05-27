@@ -11,6 +11,7 @@
       <strong>Ancestry: {{ person.ancestry }}</strong>
     </div>
     <button @click.prevent="this.$emit('openDialogValue', true, person)">Смотреть больше</button>
+    <button v-if="successfulAuth" @click.prevent="favouritePerson" class="btn-favour">Добавить в избранное</button>
   </div>
 </template>
 
@@ -19,14 +20,34 @@ export default {
   props: {
     person: {
       type: Object
+    },
+    successfulAuth: {
+      type: Boolean
+    }
+  },
+  data() {
+    return {
+      fav: false
     }
   },
   methods: {
     stubImg() {
-      if (this.person.image == '') {
+      if (this.person.image === '') {
         return 'https://ic.pics.livejournal.com/je_nny/14696246/4792536/4792536_2000.jpg'
       } else {
         return this.person.image
+      }
+    },
+    favouritePerson(event) {
+      if (this.fav === false) {
+        event.target.textContent = 'Удалить из избранного'
+        this.fav = true
+        this.$emit('favPerson', this.person)
+        console.log(this.person)
+      } else {
+        event.target.textContent = 'Добавить в избранное'
+        this.$emit('favPersonDel', this.person)
+        this.fav = false
       }
     }
   }
