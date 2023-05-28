@@ -13,7 +13,7 @@ import BtnClose from "@/UI/buttons/BtnClose.vue";
 import BtnCome from "@/UI/buttons/BtnCome.vue";
 
 export default {
-  components:{BtnCome, BtnClose},
+  components: {BtnCome, BtnClose},
   data() {
     return {
       inpLoginAuth: '',
@@ -36,6 +36,8 @@ export default {
           this.$emit('sendUser', sendUser)
           console.log('naiden')
           this.$emit('closeAuthWind', false)
+          this.inpLoginAuth = ''
+          this.inpPassAuth = ''
           break;
         } else {
           console.log('ne naiden')
@@ -56,15 +58,18 @@ export default {
   justify-content: space-around;
   padding: 20px;
 }
-.inp-auth{
+
+.inp-auth {
   width: 200px;
   height: 30px;
   margin: 5px 0;
 }
-.btn-auth{
+
+.btn-auth {
   width: 100px !important;
 }
-strong{
+
+strong {
   font-size: 20px;
   color: #ff4700;
   margin-bottom: 10px;

@@ -87,6 +87,7 @@ export default {
   position: relative;
   padding: 20px;
   box-shadow: #cb5932 7px 7px 10px 7px;
+  margin-top: 150px;
 }
 
 </style>
