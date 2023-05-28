@@ -1,14 +1,19 @@
 <template>
   <form action="" class="form-auth">
-    <button @click.prevent="$emit('closeAuth', false)">Закрыть</button>
-    <input type="text" v-model="inpLoginAuth" placeholder="Введите логин" name="" id="">
-    <input type="text" v-model="inpPassAuth" placeholder="Введите пароль" name="" id="">
-    <button @click.prevent="loginUser">Вход</button>
+    <strong>Авторизация</strong>
+    <BtnClose @click.prevent="$emit('closeAuth', false)">Закрыть</BtnClose>
+    <input class="inp-auth" type="text" v-model="inpLoginAuth" placeholder="Введите логин" name="" id="">
+    <input class="inp-auth" type="text" v-model="inpPassAuth" placeholder="Введите пароль" name="" id="">
+    <BtnCome class="btn-auth" @click.prevent="loginUser">Вход</BtnCome>
   </form>
 </template>
 
 <script>
+import BtnClose from "@/UI/buttons/BtnClose.vue";
+import BtnCome from "@/UI/buttons/BtnCome.vue";
+
 export default {
+  components:{BtnCome, BtnClose},
   data() {
     return {
       inpLoginAuth: '',
@@ -45,5 +50,23 @@ export default {
 .form-auth {
   display: flex;
   flex-direction: column;
+  width: 300px;
+  height: 150px;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+}
+.inp-auth{
+  width: 200px;
+  height: 30px;
+  margin: 5px 0;
+}
+.btn-auth{
+  width: 100px !important;
+}
+strong{
+  font-size: 20px;
+  color: #ff4700;
+  margin-bottom: 10px;
 }
 </style>

@@ -1,17 +1,32 @@
 <template>
   <div class="person">
-    <img class="person__photo" :src="stubImg()" alt="">
+    <img class="person__photo" :src="stubImg()" alt="" />
     <div class="person__info">
-      <strong>Name: {{ person.name }} </strong>
-      <strong>Species: {{ person.species }}</strong>
-      <strong>House: {{ person.house }}</strong>
-      <strong>Date of birth: {{ person.dateOfBirth }}</strong>
-      <strong>Eye Colour: {{ person.eyeColour }}</strong>
-      <strong>Gender: {{ person.gender }}</strong>
-      <strong>Ancestry: {{ person.ancestry }}</strong>
+      <div class="info-name">{{ person.name }}</div>
+      <div class="info"><strong>Species: </strong>{{ person.species }}</div>
+      <div class="info"><strong>House: </strong>{{ person.house }}</div>
+      <div class="info">
+        <strong>Date Of Birth: </strong>{{ person.dateOfBirth }}
+      </div>
+      <div class="info">
+        <strong>Eye Colour: </strong>{{ person.eyeColour }}
+      </div>
+      <div class="info"><strong>Gender: </strong>{{ person.gender }}</div>
+      <div class="info"><strong>Ancestry: </strong>{{ person.ancestry }}</div>
     </div>
-    <button @click.prevent="this.$emit('openDialogValue', true, person)">Смотреть больше</button>
-    <button v-if="successfulAuth" @click.prevent="favouritePerson" class="btn-favour">Добавить в избранное</button>
+    <button
+      class="btn-more"
+      @click.prevent="this.$emit('openDialogValue', true, person)"
+    >
+      More...
+    </button>
+    <button
+      v-if="successfulAuth"
+      @click.prevent="favouritePerson"
+      class="btn-favour"
+    >
+      Добавить в избранное
+    </button>
   </div>
 </template>
 
@@ -19,48 +34,49 @@
 export default {
   props: {
     person: {
-      type: Object
+      type: Object,
     },
     successfulAuth: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   data() {
     return {
-      fav: false
-    }
+      fav: false,
+    };
   },
   methods: {
     stubImg() {
-      if (this.person.image === '') {
-        return 'https://ic.pics.livejournal.com/je_nny/14696246/4792536/4792536_2000.jpg'
+      if (this.person.image === "") {
+        return "https://ic.pics.livejournal.com/je_nny/14696246/4792536/4792536_2000.jpg";
       } else {
-        return this.person.image
+        return this.person.image;
       }
     },
     favouritePerson(event) {
       if (this.fav === false) {
-        event.target.textContent = 'Удалить из избранного'
-        this.fav = true
-        this.$emit('favPerson', this.person)
-        console.log(this.person)
+        event.target.textContent = "Удалить из избранного";
+        event.target.classList.add("btn-favour-active");
+        this.fav = true;
+        this.$emit("favPerson", this.person);
+        console.log(this.person);
       } else {
-        event.target.textContent = 'Добавить в избранное'
-        this.$emit('favPersonDel', this.person)
-        this.fav = false
+        event.target.textContent = "Добавить в избранное";
+        event.target.classList.remove("btn-favour-active");
+        this.$emit("favPersonDel", this.person);
+        this.fav = false;
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
 .person {
-  width: 30vw;
+  width: 600px;
   display: flex;
-  margin: 10px;
-  padding: 10px;
-  border: black 1px solid;
+  margin: 30px;
+  position: relative;
 }
 
 .person__info {
@@ -69,7 +85,41 @@ export default {
 }
 
 .person__photo {
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 140px;
+  border: coral 5px solid;
+  margin-right: 20px;
+}
+
+.info-name {
+  font-size: 32px;
+}
+
+.btn-more {
+  width: 70px;
+  height: 20px;
+  align-self: end;
+  background: coral;
+  color: whitesmoke;
+  border: 2px solid #cb5932;
+  position: absolute;
+  right: 180px;
+}
+
+.btn-favour {
+  width: 150px;
+  height: 40px;
+  align-self: end;
+  background: coral;
+  color: whitesmoke;
+  border: 2px solid #cb5932;
+  position: absolute;
+  right: 0px;
+}
+
+.btn-favour-active {
+  background: #ff4700;
+  color: whitesmoke;
+  border: 2px solid #cb5932;
 }
 </style>

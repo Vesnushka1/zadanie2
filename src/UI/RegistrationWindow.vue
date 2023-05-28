@@ -1,26 +1,37 @@
 <template>
   <form action="" class="form-reg">
-    <button @click.prevent="$emit('closeReg', false)">Закрыть</button>
+    <strong>Регистрация</strong>
+    <BtnClose @click.prevent="$emit('closeReg', false)">X</BtnClose>
     <input v-model="inpLogin" type="text" placeholder="Введите логин" name="" id="">
-    <input v-model="inpPass" type="password" placeholder="Введите пароль" name="" id="">
+    <input v-model="inpPass" type="text" placeholder="Введите пароль" name="" id="">
     <input v-model="inpFam" type="text" placeholder="Фамилия" name="" id="">
     <input v-model="inpName" type="text" placeholder="Имя" name="" id="">
     <input v-model="inpOtch" type="text" placeholder="Отчество" name="" id="">
-    <input v-model="inpTel" type="number" placeholder="Телефон" name="" id="">
-    <input type="radio" name="gender" id="genderId"><label for="genderId">Мужской</label>
-    <input type="radio" name="gender" id="genderId"><label for="genderId">Женский</label>
+    <input v-model="inpTel" type="text" placeholder="Телефон" name="" id="">
     <input v-model="inpAge" type="text" placeholder="Введите возраст" name="" id="">
-    <input type="checkbox" name="faculty" id="facultyId"><label for="facultyId">Гриффиндор</label>
-    <input type="checkbox" name="faculty" id="facultyId"><label for="facultyId">Когтевран</label>
-    <input type="checkbox" name="faculty" id="facultyId"><label for="facultyId">Пуффендуй</label>
-    <input type="checkbox" name="faculty" id="facultyId"><label for="facultyId">Слизерин</label>
-    <button @click.prevent="storageRoom">Зарегистрироваться</button>
+    <div class="col">
+      <span>Ваш пол:</span>
+      <label for="genderIdM"><input type="radio" name="gender" id="genderIdM"> Мужской</label>
+      <label for="genderIdW"><input type="radio" name="gender" id="genderIdW"> Женский</label>
+    </div>
+    <div class="col">
+      <span>Любимый факультет в Хогвартсе:</span>
+      <label for="facultyIdG"><input type="checkbox" name="faculty" id="facultyIdG">Гриффиндор</label>
+      <label for="facultyIdK"><input type="checkbox" name="faculty" id="facultyIdK">Когтевран</label>
+      <label for="facultyIdP"><input type="checkbox" name="faculty" id="facultyIdP">Пуффендуй</label>
+      <label for="facultyIdS"><input type="checkbox" name="faculty" id="facultyIdS">Слизерин</label>
+    </div>
+    <BtnCome @click.prevent="storageRoom">Зарегистрироваться</BtnCome>
   </form>
 </template>
 
 <script>
 
+import BtnClose from "@/UI/buttons/BtnClose.vue";
+import BtnCome from "@/UI/buttons/BtnCome.vue";
+
 export default {
+  components: {BtnCome, BtnClose},
   data() {
     return {
       inpLogin: '',
@@ -57,30 +68,30 @@ export default {
     // }
     storageRoom() {
       //if (this.check === true) {
-        let id = Date.now()
-        let objReg = {
-          login: this.inpLogin,
-          password: this.inpPass,
-          fam: this.inpFam,
-          name: this.inpName,
-          otch: this.inpOtch,
-          tel: this.inpTel,
-          age: this.inpAge,
-          gender: this.gender,
-          faculty: this.arrayFaculty
-        }
-        localStorage.setItem(id.toString(), JSON.stringify(objReg))
-        this.inpLogin = ''
-        this.inpPass = ''
-        this.inpFam = ''
-        this.inpName = ''
-        this.inpOtch = ''
-        this.inpTel = ''
-        this.inpAge = ''
-        this.gender = ''
-        this.arrayFaculty = []
-        this.$emit('closeRegAfterReg', false)
+      let id = Date.now()
+      let objReg = {
+        login: this.inpLogin,
+        password: this.inpPass,
+        fam: this.inpFam,
+        name: this.inpName,
+        otch: this.inpOtch,
+        tel: this.inpTel,
+        age: this.inpAge,
+        gender: this.gender,
+        faculty: this.arrayFaculty
       }
+      localStorage.setItem(id.toString(), JSON.stringify(objReg))
+      this.inpLogin = ''
+      this.inpPass = ''
+      this.inpFam = ''
+      this.inpName = ''
+      this.inpOtch = ''
+      this.inpTel = ''
+      this.inpAge = ''
+      this.gender = ''
+      this.arrayFaculty = []
+      this.$emit('closeRegAfterReg', false)
+    }
     //}
   }
 }
@@ -90,5 +101,30 @@ export default {
 .form-reg {
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  width: 400px;
+  align-items: center;
+}
+
+input[type='text'] {
+  width: 270px;
+  height: 25px;
+  margin: 5px 0;
+}
+input[type='checkbox'] {
+  margin: 7px 10px 10px 0
+}
+
+strong {
+  font-size: 20px;
+  color: #ff4700;
+  margin-bottom: 10px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0 15px 65px;
+  align-self: start;
 }
 </style>
