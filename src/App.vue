@@ -13,6 +13,10 @@
         {{ modelUser.otch }}
       </div>
     </header>
+    <div class="favourites">
+      <p>Волшебники: {{ favouriteWiz.length }}</p>
+      <p>Не волшебники: {{ favouriteNoWiz.length }}</p>
+    </div>
 
     <div class="filters">
       <p>Сортировка</p>
@@ -20,11 +24,6 @@
       <filter-persons-gender @sendGender="updateValueGender"/>
       <filter-persons-eye :filterEye="filterEye" @sendEye="updateValueEye"/>
       <search-persons @searchValue="getSearchVal"/>
-    </div>
-
-    <div class="favourites">
-      <p>Волшебники: {{ favouriteWiz.length }}</p>
-      <p>Не волшебники: {{ favouriteNoWiz.length }}</p>
     </div>
 
     <person-list
@@ -194,9 +193,7 @@ export default {
       return this.sortedPersonsPosts.filter(
           (post) =>
               post.name.toLowerCase().includes(this.searchValue.toLowerCase()) ||
-              post.ancestry
-                  .toLowerCase()
-                  .includes(this.searchValue.toLowerCase()) ||
+              post.ancestry.toLowerCase().includes(this.searchValue.toLowerCase()) ||
               post.house.toLowerCase().includes(this.searchValue.toLowerCase())
       );
     },
@@ -272,12 +269,11 @@ export default {
 .favourites {
   border: #cb5932 3px solid;
   padding: 5px 10px;
-  position: absolute;
-  margin-left: 600px;
-  margin-top: 100px;
+  margin-left: -450px;
 }
+
 .dialogRegistration,
-.dialogAuth{
+.dialogAuth {
   background: #ffffff;
   box-shadow: #cb5932 7px 7px 10px 7px;
   border: 0;
